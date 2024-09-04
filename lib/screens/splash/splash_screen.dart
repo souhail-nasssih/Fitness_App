@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
       // Après 3 secondes, naviguez vers l'écran principal
       Navigator.pushReplacement(
         context,
-      MaterialPageRoute(builder: (context) => OnboardingScreen()),
+      MaterialPageRoute(builder: (context) => const OnboardingScreen()),
       );
     });
   }

@@ -106,6 +106,9 @@ class _PathSelectionScreenState extends State<PathSelectionScreen> {
                             builder: (context) => ActivityScreen()),
                       );
                     },
+                    style: ButtonStyle(
+                      backgroundColor: WidgetStateProperty.all(Colors.black),
+                    ),
                     child: const Text(
                       'Get Started',
                       style: TextStyle(color: Colors.white),

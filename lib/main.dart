@@ -7,12 +7,12 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({super.key}); 
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'My First App',
+      title: 'My second App',
       home: const SplashScreen(), // Utilisez SplashScreen comme écran initial
       theme: ThemeData(
         brightness: Brightness.light,

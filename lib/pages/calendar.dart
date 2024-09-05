@@ -11,7 +11,7 @@ class CalendarPage extends StatelessWidget {
       appBar: BaseAppBar(
         title: 'Calendar',
         onBackPressed: () {
-          Navigator.pop(context); // Navigate back to the previous screen
+          Navigator.pop(context);
         },
       ),
       body: Padding(

@@ -22,7 +22,7 @@ class ProfilePage extends StatelessWidget {
             const Padding(padding: EdgeInsets.all(10)),
             const CircleAvatar(
               radius: 50,
-              backgroundImage: AssetImage('assets/avatar.png'), // Replace with your image asset
+              backgroundImage: AssetImage('images/avatar.png'), // Replace with your image asset
               backgroundColor: Colors.transparent,
             ),
             const Padding(padding: EdgeInsets.all(10)),

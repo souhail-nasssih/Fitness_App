@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fitness_app/widgets/bottom_bar.dart';
 
 class ActivityScreen extends StatefulWidget {
   const ActivityScreen({super.key});
@@ -7,8 +8,7 @@ class ActivityScreen extends StatefulWidget {
   _ActivityScreenState createState() => _ActivityScreenState();
 }
 
-class _ActivityScreenState extends State<ActivityScreen>
-    with SingleTickerProviderStateMixin {
+class _ActivityScreenState extends State<ActivityScreen> with SingleTickerProviderStateMixin {
   late TabController _tabController;
   late PageController _pageController;
   int _currentIndex = 0;
@@ -72,7 +72,7 @@ class _ActivityScreenState extends State<ActivityScreen>
           const Center(child: Text('Intensive Activities')),
         ],
       ),
-      
+
     );
   }
 
@@ -111,11 +111,11 @@ class ActivityList extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       children: const [
         ActivityCard(
-          imagePath: 'images/5.jpg', // Replace with your image path
+          imagePath: 'images/5.jpg',
           activityName: 'Swimming',
         ),
         ActivityCard(
-          imagePath: 'images/6.jpg', // Replace with your image path
+          imagePath: 'images/6.jpg',
           activityName: 'Playing Tennis',
         ),
       ],

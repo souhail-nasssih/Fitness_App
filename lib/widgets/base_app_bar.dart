@@ -4,7 +4,7 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final VoidCallback? onBackPressed;
 
-  BaseAppBar({
+  const BaseAppBar({super.key, 
     required this.title,
     this.onBackPressed,
   });

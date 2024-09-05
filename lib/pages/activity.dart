@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ActivityScreen extends StatefulWidget {
+  const ActivityScreen({super.key});
+
   @override
   _ActivityScreenState createState() => _ActivityScreenState();
 }
@@ -101,6 +103,8 @@ class _ActivityScreenState extends State<ActivityScreen>
 }
 
 class ActivityList extends StatelessWidget {
+  const ActivityList({super.key});
+
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -124,10 +128,10 @@ class ActivityCard extends StatelessWidget {
   final String activityName;
 
   const ActivityCard({
-    Key? key,
+    super.key,
     required this.imagePath,
     required this.activityName,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

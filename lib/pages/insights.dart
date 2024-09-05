@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../widgets/base_app_bar.dart';
 
 class InsightsPage extends StatelessWidget {
+  const InsightsPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,17 +17,17 @@ class InsightsPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Icon(
+            const Icon(
               Icons.trending_up,
               size: 100,
               color: Colors.blue,
             ),
-            SizedBox(height: 16),
-            Text(
+            const SizedBox(height: 16),
+            const Text(
               'Your Insights Here',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
               'Analyze your data and performance.',
               style: TextStyle(fontSize: 16, color: Colors.grey[600]),

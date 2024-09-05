@@ -3,6 +3,8 @@ import 'package:table_calendar/table_calendar.dart';
 import '../widgets/base_app_bar.dart';
 
 class CalendarPage extends StatelessWidget {
+  const CalendarPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

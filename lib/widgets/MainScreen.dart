@@ -1,9 +1,10 @@
+// lib/screens/main_screen.dart
 import 'package:flutter/material.dart';
-import 'package:fitness_app/pages/activity.dart';
+import 'package:fitness_app/widgets/bottom_bar.dart'; // Make sure the path is correct
+import 'package:fitness_app/pages/activity.dart'; // Import the pages you'll use
 import 'package:fitness_app/pages/insights.dart';
 import 'package:fitness_app/pages/calendar.dart';
 import 'package:fitness_app/pages/profile.dart';
-import '../widgets/bottom_bar.dart';
 
 class MainScreen extends StatefulWidget {
   @override

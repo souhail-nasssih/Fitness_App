@@ -4,13 +4,13 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final VoidCallback? onBackPressed;
 
-  BaseAppBar({
+  const BaseAppBar({super.key, 
     required this.title,
     this.onBackPressed,
   });
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
   @override
   Widget build(BuildContext context) {
@@ -19,17 +19,17 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
       elevation: 0,
       leading: onBackPressed != null
           ? IconButton(
-              icon: Icon(Icons.arrow_back, color: const Color.fromARGB(255, 0, 0, 0)),
+              icon: const Icon(Icons.arrow_back, color: Color.fromARGB(255, 0, 0, 0)),
               onPressed: onBackPressed,
             )
           : null,
       title: Text(
         title,
-        style: TextStyle(color: const Color.fromARGB(255, 0, 0, 0)),
+        style: const TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
       ),
       actions: [
         IconButton(
-          icon: Icon(Icons.menu, color: const Color.fromARGB(255, 0, 0, 0)),
+          icon: const Icon(Icons.menu, color: Color.fromARGB(255, 0, 0, 0)),
           onPressed: () {},
         ),
       ],

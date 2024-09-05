@@ -1,5 +1,5 @@
-import 'package:fitness_app/pages/activity.dart';
 import 'package:flutter/material.dart';
+import 'package:fitness_app/widgets/MainScreen.dart';
 
 class PathSelectionScreen extends StatefulWidget {
   const PathSelectionScreen({super.key});
@@ -99,13 +99,16 @@ class _PathSelectionScreenState extends State<PathSelectionScreen> {
                   const SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () {
-                      // Navigate to the next part of the app
+                      // Navigate to the MainScreen with the bottom navigation bar
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => ActivityScreen()),
+                            builder: (context) => MainScreen()),
                       );
                     },
+                    style: ButtonStyle(
+                      backgroundColor: WidgetStateProperty.all(Colors.black),
+                    ),
                     child: const Text(
                       'Get Started',
                       style: TextStyle(color: Colors.white),

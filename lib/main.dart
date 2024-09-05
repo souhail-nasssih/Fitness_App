@@ -12,14 +12,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'My Second App',
-      home: const SplashScreen(), // Keep SplashScreen as the initial screen
+      home: const SplashScreen(), // SplashScreen as the initial screen
       theme: ThemeData(
         brightness: Brightness.light,
       ),
-      // darkTheme: ThemeData(
-      //   brightness: Brightness.dark,
-      // ),
-
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+      ),
       themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
     );

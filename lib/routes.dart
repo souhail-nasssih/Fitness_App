@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'pages/activity.dart';
-import 'pages/insights.dart';
-import 'pages/calendar.dart';
-import 'pages/profile.dart';
+import 'package:fitness_app/pages/activity.dart';
+import 'package:fitness_app/pages/calendar.dart';
+import 'package:fitness_app/pages/insights.dart';
+import 'package:fitness_app/pages/profile.dart';
+import 'screens/splash/splash_screen.dart';
 
 class Routes {
+  static const String splashScreen = '/splash';
   static const String activityScreen = '/';
   static const String insights = '/insights';
   static const String calendar = '/calendar';
@@ -12,16 +14,18 @@ class Routes {
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case splashScreen:
+        return MaterialPageRoute(builder: (_) =>  SplashScreen());
       case activityScreen:
-        return MaterialPageRoute(builder: (_) => ActivityScreen());
+        return MaterialPageRoute(builder: (_) =>  ActivityScreen());
       case insights:
-        return MaterialPageRoute(builder: (_) => InsightsPage());
+        return MaterialPageRoute(builder: (_) =>  InsightsPage());
       case calendar:
-        return MaterialPageRoute(builder: (_) => CalendarPage());
+        return MaterialPageRoute(builder: (_) =>  CalendarPage());
       case profile:
-        return MaterialPageRoute(builder: (_) => ProfilePage());
+        return MaterialPageRoute(builder: (_) =>  ProfilePage());
       default:
-        return MaterialPageRoute(builder: (_) => ActivityScreen()); // Default route
+        return MaterialPageRoute(builder: (_) =>  SplashScreen());
     }
   }
 }

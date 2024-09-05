@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fitness_app/widgets/bottom_bar.dart';
+import '../routes.dart'; // Import your routes
 
 class ActivityScreen extends StatefulWidget {
   const ActivityScreen({super.key});
@@ -23,6 +24,12 @@ class _ActivityScreenState extends State<ActivityScreen> with SingleTickerProvid
         _currentIndex = _pageController.page?.round() ?? 0;
       });
     });
+  }
+  void _onTap(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+    Navigator.pushNamed(context, Routes.activityScreen); // Adjust according to your needs
   }
 
   @override
@@ -72,6 +79,7 @@ class _ActivityScreenState extends State<ActivityScreen> with SingleTickerProvid
           const Center(child: Text('Intensive Activities')),
         ],
       ),
+    
 
     );
   }

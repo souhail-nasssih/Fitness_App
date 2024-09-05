@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fitness_app/widgets/bottom_bar.dart';
-import '../routes.dart'; // Import your routes
+import 'package:fitness_app/widgets/bottom_bar.dart'; // Import bottom bar if necessary
+import '../routes.dart'; // Import routes if necessary
 
 class ActivityScreen extends StatefulWidget {
   const ActivityScreen({super.key});
@@ -17,19 +17,24 @@ class _ActivityScreenState extends State<ActivityScreen> with SingleTickerProvid
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
+    
+    _tabController = TabController(length: 3, vsync: this); // 3 tabs for All, Popular, Intensive
     _pageController = PageController();
+
+    // Sync PageView with TabBar
     _pageController.addListener(() {
-      setState(() {
-        _currentIndex = _pageController.page?.round() ?? 0;
-      });
+      final pageIndex = _pageController.page?.round() ?? 0;
+      if (_tabController.index != pageIndex) {
+        _tabController.animateTo(pageIndex);
+      }
     });
-  }
-  void _onTap(int index) {
-    setState(() {
-      _currentIndex = index;
+
+    // Sync TabBar with PageView
+    _tabController.addListener(() {
+      if (!_tabController.indexIsChanging) {
+        _pageController.jumpToPage(_tabController.index);
+      }
     });
-    Navigator.pushNamed(context, Routes.activityScreen); // Adjust according to your needs
   }
 
   @override
@@ -37,10 +42,6 @@ class _ActivityScreenState extends State<ActivityScreen> with SingleTickerProvid
     _tabController.dispose();
     _pageController.dispose();
     super.dispose();
-  }
-
-  void _onNavBarTapped(int index) {
-    _pageController.jumpToPage(index);
   }
 
   @override
@@ -73,45 +74,19 @@ class _ActivityScreenState extends State<ActivityScreen> with SingleTickerProvid
       ),
       body: PageView(
         controller: _pageController,
-        children: [
-          ActivityList(),
-          const Center(child: Text('Popular Activities')),
-          const Center(child: Text('Intensive Activities')),
+        children: const [
+          AllActivitiesPage(), // This shows all activities
+          PopularActivitiesPage(), // This shows popular activities
+          IntensiveActivitiesPage(), // This shows intensive activities
         ],
       ),
-    
-
-    );
-  }
-
-  Widget _buildNavBarIcon(IconData iconData, int index) {
-    final bool isSelected = _currentIndex == index;
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        if (isSelected)
-          Container(
-            width: 40,
-            height: 40,
-            decoration: const BoxDecoration(
-              color: Colors.black,
-              shape: BoxShape.circle,
-            ),
-          ),
-        IconButton(
-          icon: Icon(
-            iconData,
-            color: isSelected ? const Color.fromARGB(255, 255, 255, 255) : Colors.black,
-          ),
-          onPressed: () => _onNavBarTapped(index),
-        ),
-      ],
     );
   }
 }
 
-class ActivityList extends StatelessWidget {
-  const ActivityList({super.key});
+// Define these pages as separate widgets or classes for each semi-page
+class AllActivitiesPage extends StatelessWidget {
+  const AllActivitiesPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -126,11 +101,31 @@ class ActivityList extends StatelessWidget {
           imagePath: 'images/6.jpg',
           activityName: 'Playing Tennis',
         ),
+        // Add more activities here
       ],
     );
   }
 }
 
+class PopularActivitiesPage extends StatelessWidget {
+  const PopularActivitiesPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(child: Text('Popular Activities'));
+  }
+}
+
+class IntensiveActivitiesPage extends StatelessWidget {
+  const IntensiveActivitiesPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(child: Text('Intensive Activities'));
+  }
+}
+
+// Reuse the ActivityCard widget if needed
 class ActivityCard extends StatelessWidget {
   final String imagePath;
   final String activityName;

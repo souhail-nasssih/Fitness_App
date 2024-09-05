@@ -1,8 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import '../widgets/base_app_bar.dart';
+import '../widgets/bottom_bar.dart';
 
-class CalendarPage extends StatelessWidget {
+class CalendarPage extends StatefulWidget {
+  @override
+  _CalendarPageState createState() => _CalendarPageState();
+}
+
+class _CalendarPageState extends State<CalendarPage> {
+  int _currentIndex = 2; // Assuming Calendar is the third tab
+
+  void _onNavBarTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+
+    // Add navigation logic if needed
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,6 +44,10 @@ class CalendarPage extends StatelessWidget {
             ),
           ],
         ),
+      ),
+      bottomNavigationBar: BottomBar(
+        currentIndex: _currentIndex,
+        onTap: _onNavBarTapped,
       ),
     );
   }

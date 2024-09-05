@@ -20,7 +20,7 @@ class ProfilePage extends StatelessWidget {
             Padding(padding: EdgeInsets.all(10)),
             CircleAvatar(
               radius: 50,
-              backgroundImage: AssetImage('assets/avatar.png'), // Replace with your image asset
+              backgroundImage: AssetImage('images/avatar.png'), // Replace with your image asset
               backgroundColor: Colors.transparent,
             ),
             Padding(padding: EdgeInsets.all(10)),

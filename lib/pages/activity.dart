@@ -70,10 +70,7 @@ class _ActivityScreenState extends State<ActivityScreen> with SingleTickerProvid
           const Center(child: Text('Intensive Activities')),
         ],
       ),
-      bottomNavigationBar: BottomBar(
-        currentIndex: _currentIndex,
-        onTap: _onNavBarTapped,
-      ),
+
     );
   }
 

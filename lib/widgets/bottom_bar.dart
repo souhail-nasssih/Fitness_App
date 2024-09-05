@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../routes.dart';
 
 class BottomBar extends StatelessWidget {
   final int currentIndex;
@@ -17,16 +18,17 @@ class BottomBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          _buildNavBarIcon(Icons.home, 0),
-          _buildNavBarIcon(Icons.show_chart, 1),
-          _buildNavBarIcon(Icons.calendar_today, 2),
-          _buildNavBarIcon(Icons.person, 3),
+          _buildNavBarIcon(Icons.home, 0, context, Routes.activityScreen),
+          _buildNavBarIcon(Icons.show_chart, 1, context, Routes.insights),
+          _buildNavBarIcon(Icons.calendar_today, 2, context, Routes.calendar),
+          _buildNavBarIcon(Icons.person, 3, context, Routes.profile),
         ],
       ),
     );
   }
 
-  Widget _buildNavBarIcon(IconData iconData, int index) {
+  Widget _buildNavBarIcon(
+      IconData iconData, int index, BuildContext context, String route) {
     final bool isSelected = currentIndex == index;
     return Stack(
       alignment: Alignment.center,
@@ -41,11 +43,12 @@ class BottomBar extends StatelessWidget {
             ),
           ),
         IconButton(
-          icon: Icon(
-            iconData,
-            color: isSelected ? Colors.white : Colors.black,
-          ),
-          onPressed: () => onTap(index),
+          icon: Icon(iconData),
+          color: isSelected ? Colors.white : Colors.black,
+          onPressed: () {
+            onTap(index);
+            Navigator.pushNamed(context, route);
+          },
         ),
       ],
     );

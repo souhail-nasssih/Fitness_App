@@ -12,16 +12,14 @@ class ActivityScreen extends StatefulWidget {
 class _ActivityScreenState extends State<ActivityScreen> with SingleTickerProviderStateMixin {
   late TabController _tabController;
   late PageController _pageController;
-  int _currentIndex = 0;
 
   @override
   void initState() {
     super.initState();
     
-    _tabController = TabController(length: 3, vsync: this); // 3 tabs for All, Popular, Intensive
+    _tabController = TabController(length: 3, vsync: this);
     _pageController = PageController();
 
-    // Sync PageView with TabBar
     _pageController.addListener(() {
       final pageIndex = _pageController.page?.round() ?? 0;
       if (_tabController.index != pageIndex) {
@@ -29,7 +27,6 @@ class _ActivityScreenState extends State<ActivityScreen> with SingleTickerProvid
       }
     });
 
-    // Sync TabBar with PageView
     _tabController.addListener(() {
       if (!_tabController.indexIsChanging) {
         _pageController.jumpToPage(_tabController.index);
@@ -46,60 +43,81 @@ class _ActivityScreenState extends State<ActivityScreen> with SingleTickerProvid
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 250, 254, 252),
-        elevation: 0,
-        title: const Text(
-          'Activities',
-          style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.menu, color: Color.fromARGB(255, 0, 0, 0)),
-            onPressed: () {},
+    return Navigator(
+      observers: [MyNavigatorObserver()],
+      onGenerateRoute: (settings) {
+        return MaterialPageRoute(
+          builder: (context) => Scaffold(
+            appBar: AppBar(
+              title: const Text('Activities'),
+            ),
+            body: PageView(
+              controller: _pageController,
+              children: [
+                AllActivitiesPage(onActivityClick: (activity) {
+                  print('Navigating to details for: $activity');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ActivityDetailScreen(activity: activity),
+                    ),
+                  );
+                }),
+                const PopularActivitiesPage(),
+                const IntensiveActivitiesPage(),
+              ],
+            ),
           ),
-        ],
-        bottom: TabBar(
-          controller: _tabController,
-          labelColor: const Color.fromARGB(255, 0, 0, 0),
-          unselectedLabelColor: const Color.fromARGB(255, 0, 0, 0),
-          indicatorColor: const Color.fromARGB(255, 0, 0, 0),
-          tabs: const [
-            Tab(text: '   All   '),
-            Tab(text: 'Popular'),
-            Tab(text: 'Intensive'),
-          ],
-        ),
-      ),
-      body: PageView(
-        controller: _pageController,
-        children: const [
-          AllActivitiesPage(), // This shows all activities
-          PopularActivitiesPage(), // This shows popular activities
-          IntensiveActivitiesPage(), // This shows intensive activities
-        ],
-      ),
+        );
+      },
     );
+  }
+}
+
+class MyNavigatorObserver extends NavigatorObserver {
+  @override
+  void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
+    print('Navigated to ${route.settings.name}');
+    super.didPush(route, previousRoute);
+  }
+
+  @override
+  void didPop(Route<dynamic> route, Route<dynamic>? previousRoute) {
+    print('Navigated back from ${route.settings.name}');
+    super.didPop(route, previousRoute);
   }
 }
 
 // Define these pages as separate widgets or classes for each semi-page
 class AllActivitiesPage extends StatelessWidget {
-  const AllActivitiesPage({super.key});
+  final Function(String) onActivityClick;
+
+  const AllActivitiesPage({super.key, required this.onActivityClick});
 
   @override
   Widget build(BuildContext context) {
     return ListView(
       padding: const EdgeInsets.all(16),
-      children: const [
-        ActivityCard(
-          imagePath: 'images/5.jpg',
-          activityName: 'Swimming',
+      children: [
+        GestureDetector(
+          onTap: () {
+            print('Activity clicked: Swimming');
+            onActivityClick('Swimming');
+          },
+          child: const ActivityCard(
+            imagePath: 'images/5.jpg',
+            activityName: 'Swimming',
+          ),
         ),
-        ActivityCard(
-          imagePath: 'images/6.jpg',
-          activityName: 'Playing Tennis',
+        GestureDetector(
+          onTap: () {
+            print('Activity clicked: Playing Tennis');
+            onActivityClick('Playing Tennis');
+          },
+          child: const ActivityCard(
+            imagePath: 'images/6.jpg',
+            activityName: 'Playing Tennis',
+          ),
         ),
         // Add more activities here
       ],
@@ -122,6 +140,42 @@ class IntensiveActivitiesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(child: Text('Intensive Activities'));
+  }
+}
+
+class ActivityDetailScreen extends StatelessWidget {
+  final String activity;
+
+  const ActivityDetailScreen({super.key, required this.activity});
+
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () => Navigator.pop(context),
+          ),
+          title: Text('$activity Details'),
+          bottom: const TabBar(
+            tabs: [
+              Tab(text: 'Coach'),
+              Tab(text: 'Localisation'),
+              Tab(text: 'Session'),
+            ],
+          ),
+        ),
+        body: const TabBarView(
+          children: [
+            Center(child: Text('Coach Info')),
+            Center(child: Text('Localisation Info')),
+            Center(child: Text('Session Info')),
+          ],
+        ),
+      ),
+    );
   }
 }
 
@@ -170,7 +224,8 @@ class ActivityCard extends StatelessWidget {
               children: [
                 Text(
                   activityName,
-                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 const Icon(Icons.local_fire_department, color: Colors.orange),
               ],

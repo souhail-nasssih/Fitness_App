@@ -1,19 +1,16 @@
-// lib/widgets/bottom_bar.dart
-import 'package:flutter/material.dart';
-import 'package:fitness_app/pages/activity.dart'; // Update imports based on your app structure
-import 'package:fitness_app/pages/insights.dart';
+import 'package:fitness_app/pages/activity.dart';
 import 'package:fitness_app/pages/calendar.dart';
+import 'package:fitness_app/pages/insights.dart';
 import 'package:fitness_app/pages/profile.dart';
+import 'package:flutter/material.dart';
 
 class BottomBar extends StatelessWidget {
   final int currentIndex;
-  final ValueChanged<int> onTap;
 
   const BottomBar({
-    Key? key,
+    super.key,
     required this.currentIndex,
-    required this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,16 +19,18 @@ class BottomBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          _buildNavBarIcon(Icons.home, 0),
-          _buildNavBarIcon(Icons.show_chart, 1),
-          _buildNavBarIcon(Icons.calendar_today, 2),
-          _buildNavBarIcon(Icons.person, 3),
+          _buildNavBarIcon(context, Icons.home, 0, const ActivityScreen()),
+          _buildNavBarIcon(context, Icons.show_chart, 1, const InsightsPage()),
+          _buildNavBarIcon(
+              context, Icons.calendar_today, 2, const CalendarPage()),
+          _buildNavBarIcon(context, Icons.person, 3, const ProfilePage()),
         ],
       ),
     );
   }
 
-  Widget _buildNavBarIcon(IconData iconData, int index) {
+  Widget _buildNavBarIcon(BuildContext context, IconData iconData, int index,
+      Widget destinationPage) {
     final bool isSelected = currentIndex == index;
     return Stack(
       alignment: Alignment.center,
@@ -50,7 +49,13 @@ class BottomBar extends StatelessWidget {
             iconData,
             color: isSelected ? Colors.white : Colors.black,
           ),
-          onPressed: () => onTap(index),
+          onPressed: () {
+            if (currentIndex != index) {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => destinationPage),
+              );
+            }
+          },
         ),
       ],
     );

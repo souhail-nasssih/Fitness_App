@@ -1,5 +1,6 @@
+import 'package:fitness_app/layouts/bottom_bar.dart';
 import 'package:flutter/material.dart';
-import '../widgets/base_app_bar.dart';
+import '../layouts/base_app_bar.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -22,7 +23,8 @@ class ProfilePage extends StatelessWidget {
             const Padding(padding: EdgeInsets.all(10)),
             const CircleAvatar(
               radius: 50,
-              backgroundImage: AssetImage('images/avatar.png'), // Replace with your image asset
+              backgroundImage: AssetImage(
+                  'images/avatar.png'), // Replace with your image asset
               backgroundColor: Colors.transparent,
             ),
             const Padding(padding: EdgeInsets.all(10)),
@@ -81,8 +83,9 @@ class ProfilePage extends StatelessWidget {
           // Add action for button press
         },
         backgroundColor: Colors.purple,
-        child: Icon(Icons.message),
+        child: const Icon(Icons.message),
       ),
+      bottomNavigationBar: const BottomBar(currentIndex: 3),
     );
   }
 }

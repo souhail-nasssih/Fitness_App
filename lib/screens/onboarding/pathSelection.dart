@@ -1,5 +1,5 @@
+import 'package:fitness_app/pages/activity.dart';
 import 'package:flutter/material.dart';
-import 'package:fitness_app/widgets/MainScreen.dart';
 
 class PathSelectionScreen extends StatefulWidget {
   const PathSelectionScreen({super.key});
@@ -103,7 +103,7 @@ class _PathSelectionScreenState extends State<PathSelectionScreen> {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => MainScreen()),
+                            builder: (context) => const ActivityScreen()),
                       );
                     },
                     child: const Text(

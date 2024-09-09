@@ -1,5 +1,6 @@
+import 'package:fitness_app/layouts/bottom_bar.dart';
 import 'package:flutter/material.dart';
-import '../widgets/base_app_bar.dart';
+import '../layouts/base_app_bar.dart';
 
 class InsightsPage extends StatelessWidget {
   const InsightsPage({super.key});
@@ -35,6 +36,7 @@ class InsightsPage extends StatelessWidget {
           ],
         ),
       ),
+      bottomNavigationBar: const BottomBar(currentIndex: 1),
     );
   }
 }

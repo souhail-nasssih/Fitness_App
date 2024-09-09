@@ -1,8 +1,11 @@
+import 'package:fitness_app/layouts/bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
-import '../widgets/base_app_bar.dart';
+import '../layouts/base_app_bar.dart';
 
 class CalendarPage extends StatefulWidget {
+  const CalendarPage({super.key});
+
   @override
   _CalendarPageState createState() => _CalendarPageState();
 }
@@ -31,7 +34,7 @@ class _CalendarPageState extends State<CalendarPage> {
                 _selectedDay = selectedDay;
               });
             },
-            calendarStyle: CalendarStyle(
+            calendarStyle: const CalendarStyle(
               todayDecoration: BoxDecoration(
                 color: Colors.transparent, // No color for today
               ),
@@ -41,14 +44,14 @@ class _CalendarPageState extends State<CalendarPage> {
             ),
             calendarBuilders: CalendarBuilders(
               selectedBuilder: (context, date, _) => Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.black, // Black background for selected day
                   shape: BoxShape.circle, // Circular shape like day 5
                 ),
                 child: Center(
                   child: Text(
                     '${date.day}',
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: Colors.white), // White text for selected day
                   ),
                 ),
@@ -57,12 +60,13 @@ class _CalendarPageState extends State<CalendarPage> {
               todayBuilder: (context, date, _) => Center(
                 child: Text(
                   '${date.day}',
-                  style:
-                      TextStyle(color: Colors.black), // Regular text for today
+                  style: const TextStyle(
+                      color: Colors.black), // Regular text for today
                 ),
               ),
             ),
           )),
+      bottomNavigationBar: const BottomBar(currentIndex: 2),
     );
   }
 }

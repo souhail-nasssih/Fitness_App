@@ -1,4 +1,5 @@
 import 'package:fitness_app/layouts/bottom_bar.dart';
+import 'package:fitness_app/pages/components/donnerCoatch.dart';
 import 'package:flutter/material.dart';
 
 class ActivityDetailScreen extends StatelessWidget {
@@ -23,7 +24,7 @@ class ActivityDetailScreen extends StatelessWidget {
         ),
         body: const TabBarView(
           children: [
-            Center(child: Text('Coach Info')),
+            Center(child: ProfileList()),
             Center(child: Text('Localisation Info')),
             Center(child: Text('Session Info')),
           ],
